@@ -10,9 +10,13 @@
     "lint": "eslint . --ext .ts",
     "test": "bun test --coverage",
     "coverage": "powershell -Command Start-Process coverage/index.html",
-    "fullcheck": "bun run validate && bun run lint && bun run test"
+    "fullcheck": "bun run validate && bun run lint && bun run test",
+    "changeset:add": "changeset add",
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.8",
     "@commitlint/cli": "^20.3.1",
     "@commitlint/config-conventional": "^20.3.1",
     "@types/bun": "latest",
