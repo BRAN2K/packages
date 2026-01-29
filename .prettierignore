@@ -1,0 +1,8 @@
+node_modules
+dist
+out
+*.tgz
+coverage
+.cache
+*.tsbuildinfo
+bun.lockb
