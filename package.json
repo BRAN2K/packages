@@ -5,7 +5,12 @@
     "packages/*"
   ],
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "validate": "tsc --noEmit",
+    "lint": "eslint . --ext .ts",
+    "test": "bun test --coverage",
+    "coverage": "powershell -Command Start-Process coverage/index.html",
+    "fullcheck": "bun run validate && bun run lint && bun run test"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.1",

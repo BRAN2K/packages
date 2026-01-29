@@ -1,0 +1,20 @@
+{
+  "name": "logger",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "bun test --coverage"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "pino": "^10.3.0"
+  }
+}
