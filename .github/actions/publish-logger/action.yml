@@ -1,0 +1,30 @@
+name: Publish Package
+description: Publish a workspace package with optional beta tag
+
+inputs:
+  package:
+    description: "Workspace package path (e.g., packages/logger)"
+    required: true
+  beta:
+    description: "Publish as beta (for testing)"
+    required: false
+    default: "false"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Publish package
+      shell: bash
+      run: |
+        if [ "${{ inputs.beta }}" = "true" ]; then
+          cd "${{ inputs.package }}"
+          BASE_VERSION=$(npm pkg get version | tr -d '"')
+          HASH=$(git rev-parse --short HEAD)
+          npm version "$BASE_VERSION-beta.$HASH" --no-git-tag-version
+          cd - > /dev/null
+          npm publish --workspace "${{ inputs.package }}" --tag beta
+        else
+          npm publish --workspace "${{ inputs.package }}"
+        fi
+      env:
+        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}

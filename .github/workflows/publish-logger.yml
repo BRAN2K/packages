@@ -1,0 +1,47 @@
+name: Publish Logger
+
+on:
+  workflow_dispatch:
+    inputs:
+      beta:
+        description: "Publish as beta (for testing)"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-logger
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+          cache: "bun"
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Publish logger
+        uses: ./.github/actions/publish-logger
+        with:
+          package: packages/logger
+          beta: ${{ inputs.beta }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
