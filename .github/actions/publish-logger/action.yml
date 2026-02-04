@@ -18,7 +18,7 @@ runs:
       run: |
         if [ "${{ inputs.beta }}" = "true" ]; then
           cd "${{ inputs.package }}"
-          BASE_VERSION=$(npm pkg get version | tr -d '"')
+          BASE_VERSION=$(node -p "require('./package.json').version")
           HASH=$(git rev-parse --short HEAD)
           npm version "$BASE_VERSION-beta.$HASH" --no-git-tag-version
           cd - > /dev/null
