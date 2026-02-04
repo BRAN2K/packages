@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A logger built on Pino",
   "type": "module",
-  "private": true,
+  "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -37,7 +37,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BRAN2K/packages.git",
+    "url": "git+https://github.com/BRAN2K/packages.git",
     "directory": "packages/logger"
   },
   "bugs": {
