@@ -22,9 +22,9 @@ runs:
           HASH=$(git rev-parse --short HEAD)
           npm version "$BASE_VERSION-beta.$HASH" --no-git-tag-version
           cd - > /dev/null
-          npm publish --workspace "${{ inputs.package }}" --tag beta
+          npm publish --workspace "${{ inputs.package }}" --tag beta --provenance --access public
         else
-          npm publish --workspace "${{ inputs.package }}"
+          npm publish --workspace "${{ inputs.package }}" --provenance --access public
         fi
       env:
         NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
